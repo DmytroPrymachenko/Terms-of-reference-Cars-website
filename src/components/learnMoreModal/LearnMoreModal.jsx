@@ -1,77 +1,128 @@
+import { useCallback, useEffect, useRef } from "react";
 import {
-  HashtagDiv,
   HashtagDivBorder,
   HashtagSpan,
-  NeimengDiv,
   NeimengModelSpan,
   NeimengSpan,
 } from "../itemList/ItemListStyled";
+import {
+  BackraundDiv,
+  LearnMoreAccessoriesDiv,
+  LearnMoreBtnClose,
+  LearnMoreH2,
+  LearnMoreHashtagDiv,
+  LearnMoreImg,
+  LearnMoreImgDiv,
+  LearnMoreLi,
+  LearnMoreLiSpan,
+  LearnMoreModalContainer,
+  LearnMoreModalDiv,
+  LearnMoreNeimengDiv,
+  LearnMoreP,
+  LearnMoreRentalButton,
+  LearnMoreRentalConditionsDiv,
+  LearnMoreUl,
+} from "./LearnMoreModalStyled";
+import CarImages from "../image/imageCarModal.png";
+import ExitBtnSVG from "../image/itemListImage/ExitBtnSVG";
 
-const LearnMoreModal = () => {
+const LearnMoreModal = ({ buttonLearnMore }) => {
+  const modalRef = useRef();
+
+  const handleClose = useCallback(() => {
+    buttonLearnMore();
+  }, [buttonLearnMore]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        handleClose();
+      }
+    };
+
+    const handleKeyPress = (e) => {
+      if (e.key === "Escape") {
+        handleClose();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [handleClose]);
+
   return (
     <>
-      <div>
-        <div>
-          <button></button>
-          <div>
-            <img></img>
-          </div>
-          <NeimengDiv>
-            <NeimengSpan>
-              Buick <NeimengModelSpan>Enclave</NeimengModelSpan>, 2008
-            </NeimengSpan>
-          </NeimengDiv>
-          <HashtagDiv>
-            <HashtagDivBorder>
-              <HashtagSpan>Kiev</HashtagSpan>
-              <HashtagSpan>Ukraine</HashtagSpan>
-              <HashtagSpan>Luxury Car Rentals</HashtagSpan>
-              <HashtagSpan>Premium</HashtagSpan>
-            </HashtagDivBorder>
-            <HashtagDivBorder>
-              <HashtagSpan>Suv</HashtagSpan>
-              <HashtagSpan>Enclave</HashtagSpan>
-              <HashtagSpan>9582</HashtagSpan>
-              <HashtagSpan>Power liftgate</HashtagSpan>
-            </HashtagDivBorder>
-          </HashtagDiv>
-          <p>
-            The Buick Enclave is a stylish and spacious SUV known for its
-            comfortable ride and luxurious features.
-          </p>
-          <div>
-            <h2>Accessories and functionalities:</h2>
-            <HashtagDiv>
+      <BackraundDiv>
+        <LearnMoreModalContainer>
+          <LearnMoreModalDiv ref={modalRef}>
+            <LearnMoreBtnClose onClick={handleClose}>
+              <ExitBtnSVG />
+            </LearnMoreBtnClose>
+            <LearnMoreImgDiv>
+              <LearnMoreImg src={CarImages} alt="Car" />
+            </LearnMoreImgDiv>
+            <LearnMoreNeimengDiv>
+              <NeimengSpan>
+                Buick <NeimengModelSpan>Enclave</NeimengModelSpan>, 2008
+              </NeimengSpan>
+            </LearnMoreNeimengDiv>
+            <LearnMoreHashtagDiv>
               <HashtagDivBorder>
                 <HashtagSpan>Kiev</HashtagSpan>
                 <HashtagSpan>Ukraine</HashtagSpan>
-                <HashtagSpan>Luxury Car Rentals</HashtagSpan>
+                <HashtagSpan>Id: 9582</HashtagSpan>
+                <HashtagSpan>Year: 2008</HashtagSpan>
+                <HashtagSpan>Type: Suv</HashtagSpan>
               </HashtagDivBorder>
               <HashtagDivBorder>
-                <HashtagSpan>Suv</HashtagSpan>
-                <HashtagSpan>Enclave</HashtagSpan>
-                <HashtagSpan>9582</HashtagSpan>
+                <HashtagSpan>Fuel Consumption: 10.5</HashtagSpan>
+                <HashtagSpan>Engine Size: 3.6L V6</HashtagSpan>
               </HashtagDivBorder>
-            </HashtagDiv>
-          </div>
-          <div>
-            <h2>Rental Conditions: </h2>
-            <ul>
-              <li>
-                Minimum age : <span>25</span>
-              </li>
-              <li>Valid driver’s license</li>
-              <li>Security deposite required </li>
-              <li>
-                Mileage: <span>5,858</span>
-              </li>
-              <li>
-                Price: <span>40$</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+            </LearnMoreHashtagDiv>
+            <LearnMoreP>
+              The Buick Enclave is a stylish and spacious SUV known for its
+              comfortable ride and luxurious features.
+            </LearnMoreP>
+            <LearnMoreAccessoriesDiv>
+              <LearnMoreH2>Accessories and functionalities:</LearnMoreH2>
+              <LearnMoreHashtagDiv>
+                <HashtagDivBorder>
+                  <HashtagSpan>Leather seats</HashtagSpan>
+                  <HashtagSpan>Panoramic sunroof</HashtagSpan>
+                  <HashtagSpan>Power liftgate</HashtagSpan>
+                </HashtagDivBorder>
+                <HashtagDivBorder>
+                  <HashtagSpan>Premium audio system</HashtagSpan>
+                  <HashtagSpan>Remote start</HashtagSpan>
+                  <HashtagSpan>Blind-spot monitoring</HashtagSpan>
+                </HashtagDivBorder>
+              </LearnMoreHashtagDiv>
+            </LearnMoreAccessoriesDiv>
+            <LearnMoreRentalConditionsDiv>
+              <LearnMoreH2>Rental Conditions: </LearnMoreH2>
+              <LearnMoreUl>
+                <LearnMoreLi>
+                  Minimum age : <LearnMoreLiSpan>25</LearnMoreLiSpan>
+                </LearnMoreLi>
+                <LearnMoreLi>Valid driver’s license</LearnMoreLi>
+                <LearnMoreLi>Security deposit required</LearnMoreLi>
+                <LearnMoreLi>
+                  Mileage: <LearnMoreLiSpan>5,858</LearnMoreLiSpan>
+                </LearnMoreLi>
+                <LearnMoreLi>
+                  Price: <LearnMoreLiSpan>40$</LearnMoreLiSpan>
+                </LearnMoreLi>
+              </LearnMoreUl>
+            </LearnMoreRentalConditionsDiv>
+            <LearnMoreRentalButton>Rental car</LearnMoreRentalButton>
+          </LearnMoreModalDiv>
+        </LearnMoreModalContainer>
+      </BackraundDiv>
     </>
   );
 };

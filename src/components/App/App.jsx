@@ -7,6 +7,7 @@ import HomePage from "../pages/HomePage";
 const App = () => {
   return (
     <>
+      {/* <GlobalBackgraund /> */}
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />

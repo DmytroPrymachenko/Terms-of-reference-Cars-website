@@ -8,6 +8,12 @@ export const HashtagDiv = styled.div`
 export const HashtagDivBorder = styled.div`
   display: flex;
 `;
+export const ItemListUl = styled.ul`
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+`;
 
 export const HashtagSpan = styled.span`
   margin-right: 6px;
@@ -84,6 +90,8 @@ export const ItemListImage = styled.img`
       rgba(18, 20, 23, 0) 41.07%
     ),
     #f3f3f2;
+  width: 274px;
+  height: 268px;
 `;
 
 export const ItemListButtonModal = styled.button`

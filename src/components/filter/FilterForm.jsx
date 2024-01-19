@@ -4,16 +4,19 @@ import {
   FilterFormSelect,
 } from "./FilterFormStyled";
 
-const FilterForm = () => {
+const FilterForm = ({ uniqueCarModels }) => {
   return (
     <section>
       <FilterFormForm>
         <div>
           <FilterFormP>Car brand</FilterFormP>
           <FilterFormSelect>
-            <option>Test1</option>
-            <option>Test2</option>
-            <option>Test3</option>
+            <option value="" disabled selected>
+              Select model
+            </option>
+            {uniqueCarModels.map((model) => (
+              <option key={model}>{model}</option>
+            ))}
           </FilterFormSelect>
         </div>
         <div>
