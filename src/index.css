@@ -1,1 +1,5 @@
 @import url("../node_modules/modern-normalize/modern-normalize.css");
+ol,
+ul {
+  list-style: none;
+}
