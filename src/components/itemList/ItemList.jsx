@@ -137,7 +137,7 @@ const ItemList = ({ filter }) => {
             ))}
           </ItemListUl>
           <DivButtonLoadMore>
-            {cars.length === 12 && (
+            {resultResponce.length === 12 && (
               <ButtonLoadMore onClick={loadMoreCars}>Load more</ButtonLoadMore>
             )}
           </DivButtonLoadMore>
