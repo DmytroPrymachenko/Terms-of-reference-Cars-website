@@ -81,12 +81,13 @@ const ItemList = ({ filter }) => {
     const favorites = getFavoritesFromLocalStorage();
     setCarFavorites(favorites.map((favorite) => favorite.id));
   }, [cars]);
-  console.log(cars);
+
   return (
     <>
       {isModalOpen && (
         <LearnMoreModal car={selectedCar} buttonLearnMore={buttonLearnMore} />
       )}
+
       <section>
         <div>
           <ItemListUl>
