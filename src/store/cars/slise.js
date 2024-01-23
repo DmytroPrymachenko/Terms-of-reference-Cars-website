@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCarThunk, getFilterParamsThunk } from "./Thunk";
+import { getCarThunk, getFilterParamsThunk } from "./thunk";
 
 const carsSlice = createSlice({
   name: "cars",

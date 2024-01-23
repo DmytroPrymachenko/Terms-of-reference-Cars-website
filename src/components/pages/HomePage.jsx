@@ -5,27 +5,37 @@ import {
   HomePageUl,
   HomePageDivUl,
   HomePageImgBacgraund,
+  HomeNavLink,
+  HomePageH1Title,
+  HomePageH1,
+  HomePageDivTitle,
 } from "./HomePageStyled";
 import imgCarsHome from "../../../imgCarsHome.json";
 import homeBackgraund from "../image/Home/HomeCarBackgraund.png";
 
 const HomePage = () => {
   return (
-    <HomePageSection>
+    <>
       <HomePageImgBacgraund src={homeBackgraund} />
-      <div>
-        <h1>Car Car Car</h1>
-      </div>
-      <HomePageDivUl>
-        <HomePageUl>
-          {imgCarsHome.map((car, index) => (
-            <HomePageLi key={index}>
-              <HomePageImg src={car.img} alt={`Car ${index + 1}`} />
-            </HomePageLi>
-          ))}
-        </HomePageUl>
-      </HomePageDivUl>
-    </HomePageSection>
+      <HomePageSection>
+        <HomePageDivTitle>
+          <div>
+            <HomePageH1Title>PREMIUM</HomePageH1Title>
+            <HomePageH1>CAR RENTAL SERVICE</HomePageH1>
+          </div>
+          <HomeNavLink to="/catalog">Choose your car</HomeNavLink>
+        </HomePageDivTitle>
+        <HomePageDivUl to="/catalog">
+          <HomePageUl>
+            {imgCarsHome.map((car, index) => (
+              <HomePageLi key={index}>
+                <HomePageImg src={car.img} alt={`Car ${index + 1}`} />
+              </HomePageLi>
+            ))}
+          </HomePageUl>
+        </HomePageDivUl>
+      </HomePageSection>
+    </>
   );
 };
 

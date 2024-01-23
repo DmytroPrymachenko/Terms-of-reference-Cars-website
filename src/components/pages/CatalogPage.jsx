@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import FilterForm from "../filter/FilterForm";
 import ItemList from "../itemList/ItemList";
-import { selectFilter } from "../api/Auth/selector";
+import { selectFilter } from "../../store/cars/selector";
 import { useEffect, useState } from "react";
-import { getFilterParamsThunk } from "../api/Auth/Thunk";
+import { getFilterParamsThunk } from "../../store/cars/thunk";
 
 const CatalogPage = () => {
   const dispatch = useDispatch();

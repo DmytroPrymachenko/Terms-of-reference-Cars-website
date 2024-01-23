@@ -1,5 +1,6 @@
 import Select, { components } from "react-select";
 import {
+  ButtonSearchCliner,
   ButtonSearchFilter,
   DivFilterSelectContainer,
   DivFilterinputContainer,
@@ -12,17 +13,17 @@ import {
   customStyles,
 } from "./FilterFormStyled";
 import { useState } from "react";
-import { getCarThunk } from "../api/Auth/Thunk";
-import { useDispatch, useSelector } from "react-redux";
-import { incrementPage, setCars, setSearch } from "../api/Auth/slise";
-import { selectCars } from "../api/Auth/selector";
+import { getCarThunk } from "../../store/cars/thunk";
+import { useDispatch } from "react-redux";
+import { incrementPage, setSearch } from "../../store/cars/slise";
+
 import ArrowDownSvg from "../image/FilterImage/ArrowDownSvg";
 import ArrowUpSvg from "../image/FilterImage/ArrowUpSvg";
 
 const FilterForm = ({ uniqueCarModels, uniqueCarPrice, filter }) => {
   const [mileageFrom, setMileageFrom] = useState("");
   const [mileageTo, setMileageTo] = useState("");
-  const cars = useSelector(selectCars);
+
   const [selectedModel, setSelectedModel] = useState(null);
   const [selectedPrice, setSelectedPrice] = useState(null);
   const dispatch = useDispatch();
@@ -35,30 +36,6 @@ const FilterForm = ({ uniqueCarModels, uniqueCarPrice, filter }) => {
     value: el,
     label: ` To ${el}`,
   }));
-
-  const handleMileageChange = (e, type) => {
-    const value = e.target.value;
-
-    if (type === "from") {
-      setMileageFrom(value);
-    } else if (type === "to") {
-      setMileageTo(value);
-    }
-
-    const filteredCars = cars.filter((car) => {
-      const mileage = car.mileage || 0;
-
-      if (type === "from") {
-        return mileage >= +value;
-      } else if (type === "to") {
-        return mileage <= +value;
-      }
-
-      return true;
-    });
-
-    dispatch(setCars({ payload: filteredCars }));
-  };
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -83,6 +60,10 @@ const FilterForm = ({ uniqueCarModels, uniqueCarPrice, filter }) => {
         {props.selectProps.menuIsOpen ? <ArrowUpSvg /> : <ArrowDownSvg />}
       </components.DropdownIndicator>
     );
+  };
+
+  const clinerPage = () => {
+    window.location.reload();
   };
 
   return (
@@ -127,17 +108,22 @@ const FilterForm = ({ uniqueCarModels, uniqueCarPrice, filter }) => {
               type="text"
               placeholder="From"
               value={mileageFrom}
-              onChange={(e) => handleMileageChange(e, "from")}
+              onChange={(e) => {
+                setMileageFrom(e.target.value);
+              }}
             />
             <FilterInputTo
               type="text"
               placeholder="To"
               value={mileageTo}
-              onChange={(e) => handleMileageChange(e, "to")}
+              onChange={(e) => {
+                setMileageTo(e.target.value);
+              }}
             />
             <ButtonSearchFilter onClick={handleSearch}>
               Search
             </ButtonSearchFilter>
+            <ButtonSearchCliner onClick={clinerPage}>Cliner</ButtonSearchCliner>
           </DivFilterinputContainer>
         </DivFilterSelectContainer>
       </FilterFormForm>

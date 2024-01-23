@@ -34,6 +34,28 @@ export const ButtonSearchFilter = styled.button`
   align-items: center;
   border-radius: 12px;
   background: #3470ff;
+  cursor: pointer;
+`;
+export const ButtonSearchCliner = styled.button`
+  margin-left: 18px;
+  color: #3470ff;
+  font-family: Manrope;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+  display: flex;
+  padding: 14px 44px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    color: #fff;
+    background: #3470ff;
+  }
 `;
 
 export const DivFilterSelectContainer = styled.div`

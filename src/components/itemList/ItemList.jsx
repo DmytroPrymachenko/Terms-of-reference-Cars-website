@@ -21,7 +21,7 @@ import HeartSvgComponent from "../image/itemListImage/HeartSvg";
 import { useEffect, useState } from "react";
 import LearnMoreModal from "../learnMoreModal/LearnMoreModal";
 import { useDispatch, useSelector } from "react-redux";
-import { getCarThunk } from "../api/Auth/Thunk";
+import { getCarThunk } from "../../store/cars/thunk";
 import {
   getFavoritesFromLocalStorage,
   toggleFavoriteTest,
@@ -31,8 +31,8 @@ import {
   selectIsLoading,
   selectstatePage,
   selectstatePerPage,
-} from "../api/Auth/selector";
-import { incrementPage, setSearch } from "../api/Auth/slise";
+} from "../../store/cars/selector";
+import { incrementPage, setSearch } from "../../store/cars/slise";
 import HeartActiveSvg from "../image/itemListImage/HeartActiveSvg";
 
 const ItemList = ({ filter }) => {

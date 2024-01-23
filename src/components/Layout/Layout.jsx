@@ -18,7 +18,7 @@ const Layout = () => {
         <HeaderDiv>
           <div>
             <NavLink to="/">
-              <img src={HomeSvGIcon} alt="Home Icon" />{" "}
+              <img src={HomeSvGIcon} alt="Home Icon" />
             </NavLink>
           </div>
           <HeaderNav>

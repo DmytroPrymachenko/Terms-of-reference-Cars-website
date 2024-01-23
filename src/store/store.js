@@ -1,4 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { reducer } from "./slise";
+import { reducer } from "./cars/slise";
 
 export const store = configureStore({ reducer });
