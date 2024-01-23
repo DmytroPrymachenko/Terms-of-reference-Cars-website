@@ -77,7 +77,7 @@ export const DivSelectContainerPrice = styled.div`
 `;
 
 export const FilterInputFrom = styled.input`
-  padding: 14px 93px 14px 24px;
+  padding: 14px 24px 14px 24px;
   border-radius: 14px 0px 0px 14px;
   border: none;
   width: 160px;
@@ -85,6 +85,12 @@ export const FilterInputFrom = styled.input`
   background: #f7f7fb;
   color: #121417;
   height: 48px;
+
+  font-family: Manrope;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
   &:hover,
   &:focus {
     border: none;
@@ -93,13 +99,17 @@ export const FilterInputFrom = styled.input`
 `;
 
 export const FilterInputTo = styled.input`
-  padding: 14px 115px 14px 24px;
+  padding: 14px 24px 14px 24px;
   border-radius: 14px 0px 0px 14px;
   border: none;
   width: 160px;
   height: 48px;
   background: #f7f7fb;
-  color: #121417;
+  font-family: Manrope;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
   min-width: 50px;
   &:hover,
   &:focus {

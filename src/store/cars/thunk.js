@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { api } from "../../components/api/api";
+import { toast } from "react-toastify";
 
 export const getCarThunk = createAsyncThunk(
   "cars/getAllCar",
@@ -16,7 +17,12 @@ export const getCarThunk = createAsyncThunk(
 
       return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      if (error.response && error.response.status === 404) {
+        const errorMessage =
+          "The car according to these parameters was not found. Try changing the settings.";
+        toast.error(errorMessage);
+        return thunkAPI.rejectWithValue(error.message);
+      }
     }
   }
 );
@@ -29,7 +35,12 @@ export const getFilterParamsThunk = createAsyncThunk(
 
       return data;
     } catch (error) {
-      thunkAPI.rejectWithValue(error.message);
+      if (error.response && error.response.status === 404) {
+        const errorMessage =
+          "The car according to these parameters was not found. Try changing the settings.";
+        toast.error(errorMessage);
+        thunkAPI.rejectWithValue(error.message);
+      }
     }
   }
 );

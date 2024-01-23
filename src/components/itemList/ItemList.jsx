@@ -34,6 +34,7 @@ import {
 } from "../../store/cars/selector";
 import { incrementPage, setSearch } from "../../store/cars/slise";
 import HeartActiveSvg from "../image/itemListImage/HeartActiveSvg";
+import { toast } from "react-toastify";
 
 const ItemList = ({ filter }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -73,7 +74,12 @@ const ItemList = ({ filter }) => {
     if (!isSearch) {
       dispatch(getCarThunk({ page: statePage, carsPerPage: statePerPage }))
         .unwrap()
-        .then((res) => setResultResponce(res));
+        .then((res) => setResultResponce(res))
+        .catch(() =>
+          toast.error(
+            "The car according to these parameters was not found. Try changing the settings."
+          )
+        );
     }
   }, [dispatch, isSearch, statePage, statePerPage]);
 

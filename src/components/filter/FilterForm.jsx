@@ -20,6 +20,7 @@ import { setCars } from "../../store/cars/slise";
 import ArrowDownSvg from "../image/FilterImage/ArrowDownSvg";
 import ArrowUpSvg from "../image/FilterImage/ArrowUpSvg";
 import { selectFilter } from "../../store/cars/selector";
+import { toast } from "react-toastify";
 
 const FilterForm = ({ uniqueCarModels, uniqueCarPrice, filter }) => {
   const [mileageFrom, setMileageFrom] = useState("");
@@ -85,7 +86,12 @@ const FilterForm = ({ uniqueCarModels, uniqueCarPrice, filter }) => {
         })
       )
         .unwrap()
-        .then((res) => filter(res.length));
+        .then((res) => filter(res.length))
+        .catch(() =>
+          toast.error(
+            "The car according to these parameters was not found. Try changing the settings."
+          )
+        );
     }
   };
 
