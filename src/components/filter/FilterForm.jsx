@@ -14,15 +14,17 @@ import {
 } from "./FilterFormStyled";
 import { useState } from "react";
 import { getCarThunk } from "../../store/cars/thunk";
-import { useDispatch } from "react-redux";
-import { incrementPage, setSearch } from "../../store/cars/slise";
+import { useDispatch, useSelector } from "react-redux";
+import { setCars } from "../../store/cars/slise";
 
 import ArrowDownSvg from "../image/FilterImage/ArrowDownSvg";
 import ArrowUpSvg from "../image/FilterImage/ArrowUpSvg";
+import { selectFilter } from "../../store/cars/selector";
 
 const FilterForm = ({ uniqueCarModels, uniqueCarPrice, filter }) => {
   const [mileageFrom, setMileageFrom] = useState("");
   const [mileageTo, setMileageTo] = useState("");
+  const Filters = useSelector(selectFilter);
 
   const [selectedModel, setSelectedModel] = useState(null);
   const [selectedPrice, setSelectedPrice] = useState(null);
@@ -32,6 +34,10 @@ const FilterForm = ({ uniqueCarModels, uniqueCarPrice, filter }) => {
     return { value: el.toLowerCase(), label: el };
   });
 
+  // Тест
+
+  // Тест
+
   const priceOptions = uniqueCarPrice.map((el) => ({
     value: el,
     label: ` To ${el}`,
@@ -39,20 +45,70 @@ const FilterForm = ({ uniqueCarModels, uniqueCarPrice, filter }) => {
 
   const handleSearch = (e) => {
     e.preventDefault();
+    let filteredByMileage = [];
 
-    dispatch(setSearch(true));
-    dispatch(incrementPage(1));
-    dispatch(
-      getCarThunk({
-        page: 1,
-        carsPerPage: 12,
-        make: selectedModel?.value,
-        rentalPrice: selectedPrice?.value.replace("$", ""),
-      })
-    )
-      .unwrap()
-      .then((res) => filter(res.length));
+    // Тест
+    if (mileageFrom !== "" || mileageTo !== "") {
+      filteredByMileage = Filters.filter((car) => {
+        const carMileage = car.mileage;
+        return (
+          (mileageFrom === "" || carMileage >= parseInt(mileageFrom, 10)) &&
+          (mileageTo === "" || carMileage <= parseInt(mileageTo, 10))
+        );
+      });
+    }
+
+    if (
+      filteredByMileage.length > 0 &&
+      (selectedModel !== null || selectedPrice !== null)
+    ) {
+      filteredByMileage = filteredByMileage.filter((car) => {
+        const modelMatch =
+          selectedModel === null ||
+          car.make.toLowerCase() === selectedModel.value;
+        const priceMatch =
+          selectedPrice === null ||
+          car.rentalPrice === selectedPrice.value.replace("$", "");
+
+        return modelMatch && priceMatch;
+      });
+    }
+
+    if (filteredByMileage.length > 0) {
+      dispatch(setCars(filteredByMileage));
+    } else {
+      // В іншому випадку викликаємо зазвичай getCarThunk
+      dispatch(
+        getCarThunk({
+          page: 1,
+          carsPerPage: 12,
+          make: selectedModel?.value,
+          rentalPrice: selectedPrice?.value.replace("$", ""),
+        })
+      )
+        .unwrap()
+        .then((res) => filter(res.length));
+    }
   };
+
+  //   setFilteredCars(filteredByMileage);
+  //   console.log(filteredByMileage);
+  //   console.log(setFilteredCars());
+  //   // Тест
+
+  //   dispatch(setSearch(true));
+  //   dispatch(incrementPage(1));
+  //   dispatch(
+  //     getCarThunk({
+  //       page: 1,
+  //       carsPerPage: 12,
+  //       make: selectedModel?.value,
+  //       rentalPrice: selectedPrice?.value.replace("$", ""),
+  //     })
+  //   )
+  //     .unwrap()
+  //     .then((res) => filter(res.length));
+  // };
 
   const DropdownIndicator = (props) => {
     return (

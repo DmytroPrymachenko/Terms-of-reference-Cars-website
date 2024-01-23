@@ -90,7 +90,7 @@ const ItemList = ({ filter }) => {
       <section>
         <div>
           <ItemListUl>
-            {cars?.map((car) => (
+            {cars.map((car) => (
               <ItemListLi key={crypto.randomUUID()}>
                 <ItemListImageDiv>
                   <ItemListImage src={car.img} alt="Car" />
