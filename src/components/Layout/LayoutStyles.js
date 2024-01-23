@@ -2,11 +2,25 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
 export const Header = styled.header`
-  display: flex;
-  height: 100px;
-  align-items: center;
-
+  width: 100%;
   background: #27282c;
+  height: 100px;
+  display: flex;
+  margin-bottom: 80px;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+`;
+
+export const HeaderDiv = styled.div`
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1220px;
+
   * {
     margin: 0;
     padding: 0;
@@ -18,6 +32,7 @@ export const Header = styled.header`
 export const HeaderNav = styled.nav`
   display: flex;
   gap: 50px;
+  padding-left: 100px;
 `;
 
 export const HomeNavLink = styled(NavLink)`

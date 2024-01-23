@@ -23,10 +23,10 @@ import {
   LearnMoreRentalConditionsDiv,
   LearnMoreUl,
 } from "./LearnMoreModalStyled";
-import CarImages from "../image/imageCarModal.png";
+
 import ExitBtnSVG from "../image/itemListImage/ExitBtnSVG";
 
-const LearnMoreModal = ({ buttonLearnMore }) => {
+const LearnMoreModal = ({ car, buttonLearnMore }) => {
   const modalRef = useRef();
 
   const handleClose = useCallback(() => {
@@ -64,42 +64,42 @@ const LearnMoreModal = ({ buttonLearnMore }) => {
               <ExitBtnSVG />
             </LearnMoreBtnClose>
             <LearnMoreImgDiv>
-              <LearnMoreImg src={CarImages} alt="Car" />
+              <LearnMoreImg src={car.img} alt="Car" />
             </LearnMoreImgDiv>
             <LearnMoreNeimengDiv>
               <NeimengSpan>
-                Buick <NeimengModelSpan>Enclave</NeimengModelSpan>, 2008
+                {car.make} <NeimengModelSpan>{car.model}</NeimengModelSpan>,
+                {car.year}
               </NeimengSpan>
             </LearnMoreNeimengDiv>
             <LearnMoreHashtagDiv>
               <HashtagDivBorder>
-                <HashtagSpan>Kiev</HashtagSpan>
-                <HashtagSpan>Ukraine</HashtagSpan>
-                <HashtagSpan>Id: 9582</HashtagSpan>
-                <HashtagSpan>Year: 2008</HashtagSpan>
-                <HashtagSpan>Type: Suv</HashtagSpan>
+                <HashtagSpan>{car.address.split(", ")[1]}</HashtagSpan>
+                <HashtagSpan>{car.address.split(", ")[2]}</HashtagSpan>
+                <HashtagSpan>Id: {car.id}</HashtagSpan>
+                <HashtagSpan>Year: {car.year}</HashtagSpan>
+                <HashtagSpan>Type: {car.type}</HashtagSpan>
               </HashtagDivBorder>
               <HashtagDivBorder>
-                <HashtagSpan>Fuel Consumption: 10.5</HashtagSpan>
-                <HashtagSpan>Engine Size: 3.6L V6</HashtagSpan>
+                <HashtagSpan>
+                  Fuel Consumption: {car.fuelConsumption}
+                </HashtagSpan>
+                <HashtagSpan>Engine Size: 3.6L V6{car.engineSize}</HashtagSpan>
               </HashtagDivBorder>
             </LearnMoreHashtagDiv>
-            <LearnMoreP>
-              The Buick Enclave is a stylish and spacious SUV known for its
-              comfortable ride and luxurious features.
-            </LearnMoreP>
+            <LearnMoreP>{car.description}</LearnMoreP>
             <LearnMoreAccessoriesDiv>
               <LearnMoreH2>Accessories and functionalities:</LearnMoreH2>
               <LearnMoreHashtagDiv>
                 <HashtagDivBorder>
-                  <HashtagSpan>Leather seats</HashtagSpan>
-                  <HashtagSpan>Panoramic sunroof</HashtagSpan>
-                  <HashtagSpan>Power liftgate</HashtagSpan>
+                  {car.accessories.map((accessory, index) => (
+                    <HashtagSpan key={index}>{accessory}</HashtagSpan>
+                  ))}
                 </HashtagDivBorder>
                 <HashtagDivBorder>
-                  <HashtagSpan>Premium audio system</HashtagSpan>
-                  <HashtagSpan>Remote start</HashtagSpan>
-                  <HashtagSpan>Blind-spot monitoring</HashtagSpan>
+                  {car.functionalities.map((accessory, index) => (
+                    <HashtagSpan key={index}>{accessory}</HashtagSpan>
+                  ))}
                 </HashtagDivBorder>
               </LearnMoreHashtagDiv>
             </LearnMoreAccessoriesDiv>
@@ -107,15 +107,21 @@ const LearnMoreModal = ({ buttonLearnMore }) => {
               <LearnMoreH2>Rental Conditions: </LearnMoreH2>
               <LearnMoreUl>
                 <LearnMoreLi>
-                  Minimum age : <LearnMoreLiSpan>25</LearnMoreLiSpan>
+                  Minimum age :{" "}
+                  <LearnMoreLiSpan>
+                    {car.rentalConditions.split("age: ")[1].split("\n")[0]}
+                  </LearnMoreLiSpan>
                 </LearnMoreLi>
-                <LearnMoreLi>Valid driver’s license</LearnMoreLi>
-                <LearnMoreLi>Security deposit required</LearnMoreLi>
+                <LearnMoreLi>{car.rentalConditions.split("\n")[1]}</LearnMoreLi>
+                <LearnMoreLi>{car.rentalConditions.split("\n")[2]}</LearnMoreLi>
                 <LearnMoreLi>
-                  Mileage: <LearnMoreLiSpan>5,858</LearnMoreLiSpan>
+                  Mileage:{" "}
+                  <LearnMoreLiSpan>
+                    {car.mileage.toLocaleString("en-US")}
+                  </LearnMoreLiSpan>
                 </LearnMoreLi>
                 <LearnMoreLi>
-                  Price: <LearnMoreLiSpan>40$</LearnMoreLiSpan>
+                  Price: <LearnMoreLiSpan>{car.rentalPrice}</LearnMoreLiSpan>
                 </LearnMoreLi>
               </LearnMoreUl>
             </LearnMoreRentalConditionsDiv>

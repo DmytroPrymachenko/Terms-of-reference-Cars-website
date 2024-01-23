@@ -8,11 +8,17 @@ export const HashtagDiv = styled.div`
 export const HashtagDivBorder = styled.div`
   display: flex;
 `;
+
+export const H1Text = styled.h1`
+  display: flex;
+`;
+
 export const ItemListUl = styled.ul`
   display: grid;
   justify-items: center;
   grid-template-columns: repeat(4, 1fr);
   gap: 30px;
+  padding-bottom: 100px;
 `;
 
 export const HashtagSpan = styled.span`
@@ -49,6 +55,35 @@ export const NeimengSpan = styled.span`
 export const NeimengModelSpan = styled.span`
   color: #3470ff;
 `;
+export const ButtonLoadMore = styled.button`
+  color: #3470ff;
+  font-family: Manrope;
+  font-size: 16px;
+
+  font-weight: 500;
+  line-height: 24px;
+  text-decoration-line: underline;
+  border: none;
+  background: transparent;
+  &:active,
+  &:hover,
+  &:focus {
+    color: #0b44cd;
+  }
+  cursor: pointer;
+  padding: 10px;
+
+  margin-bottom: 100px;
+`;
+
+export const DivButtonLoadMore = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+`;
+
 export const CostSpan = styled.span`
   color: #121417;
 
@@ -63,6 +98,14 @@ export const ItemListLi = styled.li`
   height: 426px;
   flex-direction: column;
 `;
+
+export const ItemFavoriteLi = styled.li`
+  display: flex;
+  width: 274px;
+  height: 500px;
+  flex-direction: column;
+`;
+
 export const ItemListImageDiv = styled.div`
   position: relative;
   padding-bottom: 14px;
@@ -92,6 +135,7 @@ export const ItemListImage = styled.img`
     #f3f3f2;
   width: 274px;
   height: 268px;
+  object-fit: cover;
 `;
 
 export const ItemListButtonModal = styled.button`

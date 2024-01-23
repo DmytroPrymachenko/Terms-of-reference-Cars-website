@@ -1,14 +1,33 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import FilterForm from "../filter/FilterForm";
 import ItemList from "../itemList/ItemList";
+import { selectFilter } from "../api/Auth/selector";
+import { useEffect, useState } from "react";
+import { getFilterParamsThunk } from "../api/Auth/Thunk";
 
 const CatalogPage = () => {
-  const cars = useSelector((state) => state.cars);
-  const uniqueCarModels = [...new Set(cars.map((car) => car.model))];
+  const dispatch = useDispatch();
+  const filters = useSelector(selectFilter);
+  const uniqueCarModels = [...new Set(filters.map((car) => car.make))];
+  const uniqueCarPrice = [...new Set(filters.map((car) => car.rentalPrice))];
+  const [filter, setFilter] = useState(null);
+
+  function getFilter(obj) {
+    if (obj) {
+      setFilter(obj);
+    }
+  }
+  useEffect(() => {
+    dispatch(getFilterParamsThunk());
+  }, [dispatch]);
   return (
     <>
-      <FilterForm uniqueCarModels={uniqueCarModels} />
-      <ItemList />
+      <FilterForm
+        filter={getFilter}
+        uniqueCarModels={uniqueCarModels}
+        uniqueCarPrice={uniqueCarPrice}
+      />
+      <ItemList filter={filter} />
     </>
   );
 };
