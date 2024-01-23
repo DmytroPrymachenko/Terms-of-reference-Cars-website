@@ -81,7 +81,7 @@ const ItemList = ({ filter }) => {
     const favorites = getFavoritesFromLocalStorage();
     setCarFavorites(favorites.map((favorite) => favorite.id));
   }, [cars]);
-
+  console.log(cars);
   return (
     <>
       {isModalOpen && (
@@ -137,7 +137,7 @@ const ItemList = ({ filter }) => {
             ))}
           </ItemListUl>
           <DivButtonLoadMore>
-            {resultResponce.length === 12 && (
+            {cars.length === 12 && (
               <ButtonLoadMore onClick={loadMoreCars}>Load more</ButtonLoadMore>
             )}
           </DivButtonLoadMore>
