@@ -1,2 +1,4 @@
 import styled from "styled-components";
-export const HomePageSection = styled.section``;
+export const HomePageSection = styled.section`
+  width: 100%;
+`;
