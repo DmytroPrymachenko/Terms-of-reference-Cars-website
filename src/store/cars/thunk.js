@@ -16,7 +16,7 @@ export const getCarThunk = createAsyncThunk(
 
       return data;
     } catch (error) {
-      thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
