@@ -47,7 +47,6 @@ const FilterForm = ({ uniqueCarModels, uniqueCarPrice, filter }) => {
     e.preventDefault();
     let filteredByMileage = [];
 
-    // Тест
     if (mileageFrom !== "" || mileageTo !== "") {
       filteredByMileage = Filters.filter((car) => {
         const carMileage = car.mileage;
@@ -77,7 +76,6 @@ const FilterForm = ({ uniqueCarModels, uniqueCarPrice, filter }) => {
     if (filteredByMileage.length > 0) {
       dispatch(setCars(filteredByMileage));
     } else {
-      // В іншому випадку викликаємо зазвичай getCarThunk
       dispatch(
         getCarThunk({
           page: 1,
@@ -90,25 +88,6 @@ const FilterForm = ({ uniqueCarModels, uniqueCarPrice, filter }) => {
         .then((res) => filter(res.length));
     }
   };
-
-  //   setFilteredCars(filteredByMileage);
-  //   console.log(filteredByMileage);
-  //   console.log(setFilteredCars());
-  //   // Тест
-
-  //   dispatch(setSearch(true));
-  //   dispatch(incrementPage(1));
-  //   dispatch(
-  //     getCarThunk({
-  //       page: 1,
-  //       carsPerPage: 12,
-  //       make: selectedModel?.value,
-  //       rentalPrice: selectedPrice?.value.replace("$", ""),
-  //     })
-  //   )
-  //     .unwrap()
-  //     .then((res) => filter(res.length));
-  // };
 
   const DropdownIndicator = (props) => {
     return (
